@@ -1,0 +1,42 @@
+<p>task-form works!</p>
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="title" formControlName="title" required>
+      <!-- <div *ngIf="taskForm.get('title').hasError('required')" class="alert alert-danger">
+        Title is required.
+      </div> -->
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" formControlName="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="dueDate">Due Date:</label>
+      <input type="date" class="form-control" id="dueDate" formControlName="dueDate">
+    </div>
+    <div class="form-group">
+      <label for="priority">Priority:</label>
+      <select class="form-control" id="priority" formControlName="priority" required>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+      <!-- <div *ngIf="taskForm.get('priority').hasError('required')" class="alert alert-danger">
+        Priority is required.
+      </div> -->
+    </div>
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select class="form-control" id="status" formControlName="status"  *ngIf="editMode">
+        <option value="pending">Pending</option>
+        <option value="in progress">In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+      <!-- <span *ngIf="!editMode">{{ taskForm.get('status').value }}</span> -->
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">
+      {{ editMode ? 'Save Changes' : 'Create Task' }}
+    </button>
+  </form>
+  

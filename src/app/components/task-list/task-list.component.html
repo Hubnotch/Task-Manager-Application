@@ -1,0 +1,38 @@
+<p>task-list works!</p>
+<div class="task-list">
+    <h2>Tasks</h2>
+    <div class="filter-section">
+      <label for="priorityFilter">Filter by Priority:</label>
+      <select class="form-control" id="priorityFilter" [(ngModel)]="selectedPriority">
+        <option value="all">All</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+      <label for="statusFilter">Filter by Status:</label>
+      <select class="form-control" id="statusFilter" [(ngModel)]="selectedStatus">
+        <option value="all">All</option>
+        <option value="pending">Pending</option>
+        <option value="in progress">In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+    </div>
+    <ul class="task-list-items">
+      <li *ngFor="let task of tasks">
+        <div class="task-details">
+          <h3>{{ task.title }}</h3>
+          <p *ngIf="task.description">{{ task.description }}</p>
+          <div class="task-info">
+            <span>Due Date: {{ task.dueDate ? task.dueDate.toLocaleDateString() : '-' }}</span>
+            <span>Priority: {{ task.priority }}</span>
+            <span>Status: {{ task.status }}</span>
+          </div>
+        </div>
+        <div class="task-actions">
+          <button class="btn btn-primary" (click)="editTask(task.id)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteTask(task.id)">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
